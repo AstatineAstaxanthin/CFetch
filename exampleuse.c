@@ -6,7 +6,7 @@ int main() {
     char* hook = "hook address";
 
 // JSON
- {"content":"infos that u wanna send"}
+// {"content":"infos that u wanna send"}
     char* payload = "{\"content\": \"infos that u wanna send\"}";
 
     char cmd[2048];
