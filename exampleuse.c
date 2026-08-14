@@ -1,3 +1,4 @@
+// for mobile
 #include <stdio.h>
 #include <stdlib.h>
 
