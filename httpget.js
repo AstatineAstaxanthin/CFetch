@@ -9,8 +9,8 @@ async function run() {
   const args = process.argv;
   const url = args[2];
   const method = (args[3] || 'GET').toUpperCase();
-  const payloadstr = args[4] || null;
-  const headersstr = args[5] || null;
+  const payload = args[4] || null;
+  const header = args[5] || null;
 
   if (!url) {
     console.error("theres no url");
@@ -23,9 +23,9 @@ async function run() {
       'User-Agent': 'C-JS-Fetch-Bridge/1.0'
     };
 
-    if (headersstr) {
+    if (header) {
       try {
-        const customheaders = JSON.parse(headersstr);
+        const customheaders = JSON.parse(header);
         headers = { ...headers, ...customheaders };
       } catch (e) {
         console.error("parsing failed, using default header");
@@ -36,20 +36,14 @@ async function run() {
     const options = { method, headers };
 
     // Body/Payload
-    if (payloadstr && ['POST', 'PUT', 'PATCH'].includes(method)) {
-      try {
-        JSON.parse(payloadstr);
-        options.body = payloadstr;
-      } catch (e) {
-        options.body = payloadstr;
-      }
+    if (payload && ['POST', 'PUT', 'PATCH'].includes(method)) {
+       options.body = payload;
     }
 
     const res = await fetch(url, options);
 
     const restxt = await res.text();
 
-    // popen()
     console.log(restxt);
   } catch (error) {
     console.error(`request failed: ${error.message}`);
