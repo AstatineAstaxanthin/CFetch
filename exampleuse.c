@@ -12,7 +12,7 @@ int main() {
     char cmd[2048];
     sprintf(cmd, "node ~/httpget.js \"%s\" \"POST\" '%s'", hook, payload);
 
-    system(command);
+    system(cmd);
 
     return 0;
 }
